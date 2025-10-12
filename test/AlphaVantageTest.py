@@ -4,12 +4,12 @@ from unittest.mock import mock_open, MagicMock
 import numpy as np
 import pandas as pd
 
-from ingest.alphaVantage.AlphaVantageExtractor import AlphaVantageExtractor
+from extract.alphaVantage.AlphaVantageExtractor import AlphaVantageExtractor
 
 
 class MyTestCase(unittest.TestCase):
 
-    @unittest.mock.patch('ingest.alphaVantage.AlphaVantageExtractor.requests.get')
+    @unittest.mock.patch('extract.alphaVantage.AlphaVantageExtractor.requests.get')
     def test_fetch_stocks(self, mock_get):
 
         # mock the API call to return a sample dataframe
