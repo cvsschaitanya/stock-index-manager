@@ -7,7 +7,8 @@ from extract.Extractor import Extractor
 
 
 class AlphaVantageExtractor(Extractor):
-    def extract(self):
+
+    def _extract(self):
         alpha_vantage_api_key = os.getenv("ALPHA_VANTAGE_API_KEY")
         url = f"https://www.alphavantage.co/query?function=LISTING_STATUS&apikey={alpha_vantage_api_key}"
         # make request
