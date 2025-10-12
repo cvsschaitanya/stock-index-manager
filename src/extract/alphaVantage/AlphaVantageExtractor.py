@@ -3,11 +3,11 @@ import os
 import requests
 from io import StringIO
 
-from extract.RawDataExtractor import RawDataExtractor
+from extract.Extractor import Extractor
 
 
-class AlphaVantageExtractor(RawDataExtractor):
-    def fetch_stocks(self):
+class AlphaVantageExtractor(Extractor):
+    def extract(self):
         alpha_vantage_api_key = os.getenv("ALPHA_VANTAGE_API_KEY")
         url = f"https://www.alphavantage.co/query?function=LISTING_STATUS&apikey={alpha_vantage_api_key}"
         # make request

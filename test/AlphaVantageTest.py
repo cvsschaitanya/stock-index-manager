@@ -21,7 +21,7 @@ AAPL,Apple Inc,NASDAQ,Stock,1980-12-12,,Active
         mock_get.return_value = fake_response
 
         data_source = AlphaVantageExtractor()
-        df = data_source.fetch_stocks()
+        df = data_source.extract()
 
         pd.testing.assert_frame_equal(df, pd.DataFrame({
             'symbol': ['AAPL'],
