@@ -3,7 +3,7 @@ import os
 import requests
 from io import StringIO
 
-from extract.Extractor import Extractor
+from base.extract.Extractor import Extractor
 
 
 class AlphaVantageExtractor(Extractor):

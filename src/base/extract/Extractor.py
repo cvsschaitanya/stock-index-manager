@@ -1,13 +1,13 @@
 from abc import abstractmethod, ABC
 
-from observe.Provider import Provider
+from base.observe.Provider import Provider
 
 
 class Extractor(ABC, Provider):
 
     def start(self):
         df = self._extract()
-        self._notify(df)
+        self._provide(df)
 
     @abstractmethod
     def _extract(self):

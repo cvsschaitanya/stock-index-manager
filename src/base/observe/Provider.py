@@ -5,6 +5,6 @@ class Provider:
     def add_listener(self, observer):
         self.observers.append(observer)
 
-    def _notify(self, df):
+    def _provide(self, df):
         for observer in self.observers:
             observer.observe(df)

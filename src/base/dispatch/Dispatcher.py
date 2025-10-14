@@ -1,6 +1,6 @@
-from abc import abstractmethod, ABC
+from abc import abstractmethod
 
-from observe.Listener import Listener
+from base.observe.Listener import Listener
 
 
 class Dispatcher(Listener):

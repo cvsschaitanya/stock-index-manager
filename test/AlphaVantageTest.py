@@ -4,7 +4,7 @@ from unittest.mock import mock_open, MagicMock
 import numpy as np
 import pandas as pd
 
-from extract.alphaVantage.AlphaVantageExtractor import AlphaVantageExtractor
+from data.alphaVantage.AlphaVantageExtractor import AlphaVantageExtractor
 
 
 class MyTestCase(unittest.TestCase):
