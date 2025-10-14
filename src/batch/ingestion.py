@@ -1,17 +1,27 @@
 from datetime import date
 
+from base.extract.Pipeline import Pipeline
 from base.observe.LambdaListener import LambdaListener
 from config import load_config, config
-from data.db.DatabaseDispatcher import DatabaseDispatcher
 from data.db.DatabaseExtractor import DatabaseExtractor
 from data.db.MetadataDbDispatcher import MetadataDbDispatcher
 from data.polygon.PolygonStocksExtractor import PolygonStocksExtractor
 from data.polygon.PolygonStocksTransformer import PolygonStocksTransformer
 from data.polygon.RateLimitedPolygonTickerExtractor import RateLimitedPolygonTickerExtractor
+from data.db.TickerDbDispatcher import TickerDbDispatcher
+from data.polygon.PolygonTickerExtractor import PolygonTickerExtractor
+from data.polygon.PolygonTickerTransformer import PolygonTickerTransformer
 
 
-def ingest_ticker_data(ticker):
-    extractor = RateLimitedPolygonTickerExtractor(ticker, date.today().isoformat())
+
+def ingest_ticker_data(tickers):
+    today = date.today().isoformat()
+    extractor = RateLimitedPolygonTickerExtractor(tickers, lambda ticker: Pipeline(
+        PolygonTickerExtractor(ticker, today),
+        PolygonTickerTransformer(),
+        TickerDbDispatcher(config['DB_PATH'], "TickerData")
+    )
+                                                  )
     extractor.start()
 
 
