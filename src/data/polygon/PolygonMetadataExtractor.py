@@ -1,12 +1,14 @@
 import pandas as pd
+from polygon import ReferenceClient
 
 from data.polygon.PolygonApiExtractor import PolygonApiExtractor
 
 
-class PolygonStocksExtractor(PolygonApiExtractor):
+class PolygonMetadataExtractor(PolygonApiExtractor):
 
     def __init__(self, count=1000):
         super().__init__()
+        self.client = ReferenceClient(self.polygon_api_key)
         self.count = count
 
     def _extract(self):
@@ -22,6 +24,4 @@ class PolygonStocksExtractor(PolygonApiExtractor):
 
         # TODO: handle validation
 
-        df = pd.DataFrame(response["results"])
-
-        return df
+        return response["results"]

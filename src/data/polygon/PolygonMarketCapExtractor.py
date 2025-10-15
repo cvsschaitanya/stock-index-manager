@@ -1,9 +1,12 @@
+from polygon import ReferenceClient
+
 from data.polygon.PolygonApiExtractor import PolygonApiExtractor
 
 
-class PolygonTickerExtractor(PolygonApiExtractor):
+class PolygonMarketCapExtractor(PolygonApiExtractor):
     def __init__(self, ticker, date):
         super().__init__()
+        self.client = ReferenceClient(self.polygon_api_key)
         self.date = date
         self.ticker = ticker
 

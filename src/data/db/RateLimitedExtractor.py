@@ -14,10 +14,12 @@ class RateLimitedExtractor(Extractor):
             self.buckets.append(iterable[i:i + self.req_per_minute])
 
     def _extract(self):
+        print("Waiting for 60 seconds to respect rate limits...")
+        time.sleep(60)  # Wait for 60 seconds before the next batch
         for bucket in self.buckets:
-            print("Waiting for 60 seconds to respect rate limits...")
-            time.sleep(60)  # Wait for 60 seconds before the next batch
             for element in bucket:
                 print(f"Extracting data for element: {element}")
                 extractor = self.extractor_supplier(element)
                 extractor.start()
+            print("Waiting for 60 seconds to respect rate limits...")
+            time.sleep(60)  # Wait for 60 seconds before the next batch

@@ -1,3 +1,5 @@
+import pandas as pd
+
 from base.transform.Transformer import Transformer
 
 
@@ -6,7 +8,9 @@ class PolygonStocksTransformer(Transformer):
         super().__init__()
         self.count = count
 
-    def _transform(self, df):
+    def _transform(self, data):
+        df = pd.DataFrame(data)
+
         df = df[df['locale'] == 'us']
         df = df[df['type'] == 'CS']
 

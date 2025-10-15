@@ -29,6 +29,8 @@ class DatabaseDispatcher(Dispatcher):
             with self.conn:
                 self.conn.execute(query, row)
 
+        print(f"Wrote {len(df)} rows to {self.table} table.")
+
     def create_table_if_not_exists(self):
         with self.conn:
             self.conn.execute(self.create_table_query())
