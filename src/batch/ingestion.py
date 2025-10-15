@@ -7,7 +7,7 @@ from data.db.DatabaseExtractor import DatabaseExtractor
 from data.db.MetadataDbDispatcher import MetadataDbDispatcher
 from data.polygon.PolygonStocksExtractor import PolygonStocksExtractor
 from data.polygon.PolygonStocksTransformer import PolygonStocksTransformer
-from data.polygon.RateLimitedPolygonTickerExtractor import RateLimitedPolygonTickerExtractor
+from data.polygon.RateLimitedExtractor import RateLimitedExtractor
 from data.db.TickerDbDispatcher import TickerDbDispatcher
 from data.polygon.PolygonTickerExtractor import PolygonTickerExtractor
 from data.polygon.PolygonTickerTransformer import PolygonTickerTransformer
@@ -16,12 +16,12 @@ from data.polygon.PolygonTickerTransformer import PolygonTickerTransformer
 
 def ingest_ticker_data(tickers):
     today = date.today().isoformat()
-    extractor = RateLimitedPolygonTickerExtractor(tickers, lambda ticker: Pipeline(
+    extractor = RateLimitedExtractor(tickers, lambda ticker: Pipeline(
         PolygonTickerExtractor(ticker, today),
         PolygonTickerTransformer(),
         TickerDbDispatcher(config['DB_PATH'], "TickerData")
     )
-                                                  )
+                                     )
     extractor.start()
 
 

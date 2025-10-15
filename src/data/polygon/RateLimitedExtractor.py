@@ -3,7 +3,7 @@ import time
 from base.extract.Extractor import Extractor
 
 
-class RateLimitedPolygonTickerExtractor(Extractor):
+class RateLimitedExtractor(Extractor):
 
     def __init__(self, iterable, extractor_supplier, req_per_minute=5):
         super().__init__()
