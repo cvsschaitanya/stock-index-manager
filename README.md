@@ -22,6 +22,11 @@ A small, pragmatic toolkit (and a little chaotic) to ingest stock data, compute 
 * Start API helper: `start_api.sh`
 * Local DB sample: `src/batch/stocks.db.liq` and `src/batch/stocks.db.bak`
 
+## Modules
+
+See the [Modules documentation](docs/modules.md) for details.
+
+
 ---
 
 ## Install & run (developer quickstart)
