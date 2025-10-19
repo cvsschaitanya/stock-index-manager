@@ -10,15 +10,15 @@ from data.polygon.PolygonMarketCapExtractor import PolygonMarketCapExtractor
 from data.polygon.PolygonMarketCapTransformer import PolygonMarketCapTransformer
 
 
-def ingest_ticker_market_cap(dates, tickers, defensive=False):
+def ingest_ticker_market_cap(dates, tickers, strategy='BACK'):
     dates = [d for d in dates if date.fromisoformat(d).weekday() < 5]
 
     queries = [{'ticker': ticker, 'market_date': dt} for ticker in tickers for dt in dates]
     extractor = RateLimitedExtractor(queries, lambda q: Pipeline(
         PolygonMarketCapExtractor(q['ticker'], q['market_date']),
         PolygonMarketCapTransformer(),
-        TickerDbDispatcher(config['DB_PATH'], "TickerData")
-    ), defensive=defensive)
+        TickerDbDispatcher(config['DB_PATH'])
+    ), strategy=strategy)
     extractor.start()
 
 
@@ -28,7 +28,7 @@ def ingest_market_cap(dates, count=None):
         LambdaListener(lambda x: ingest_ticker_market_cap(
             dates,
             [_x[0] for _x in x[:count if count else len(x)]],
-            defensive=True
+            strategy='FRONT'
         ))
     )
     extractor.start()

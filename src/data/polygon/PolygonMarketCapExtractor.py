@@ -13,6 +13,7 @@ class PolygonMarketCapExtractor(PolygonApiExtractor):
     def _extract(self):
         print(self.ticker)
         response = self.client.get_ticker_details(self.ticker, self.date)
+        print(response)
 
         ticker_data = response["results"]
         ticker_data["date"] = self.date

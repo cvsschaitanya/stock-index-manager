@@ -10,12 +10,14 @@ class PolygonStocksTransformer(Transformer):
 
     def _transform(self, data):
         df = pd.DataFrame(data)
+        print(list(df['ticker']))
 
         # Filter for test purpose
         df = self.filter_tickers(df)
 
         df = df[df['locale'] == 'us']
         df = df[df['type'] == 'CS']
+
 
         df = df[['ticker', 'name', 'primary_exchange']]
 
@@ -29,17 +31,17 @@ class PolygonStocksTransformer(Transformer):
 
     def filter_tickers(self, df):
         valid_tickers = [
-            'A',
-            'AA',
-            'AACI',
-            'AAL',
-            'AAME',
-            'AAMI',
-            'AAOI',
-            'AAON',
-            'AAPL',
-            'ABG',
+            "PYPL",  # PayPal Holdings
+            "SQ",  # Block (Square)
+            "UBER",  # Uber Technologies
+            "ABNB",  # Airbnb
+            "CRM",  # Salesforce
+            "ADBE",  # Adobe
+            "AMD",  # Advanced Micro Devices
+            "INTC",  # Intel
+            "NFLX",  # Netflix
+            "NKE"  # Nike
         ]
 
-        df = df[df['ticker'] in valid_tickers]
+        df = df[df['ticker'].isin(valid_tickers)]
         return df

@@ -12,6 +12,7 @@ class PolygonClosePriceExtractor(PolygonApiExtractor):
     def _extract(self):
         response = self.client.get_grouped_daily_bars(self.date)
 
+        print(response)
         price_data = response["results"]
 
         print(price_data[:5])
