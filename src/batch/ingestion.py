@@ -36,9 +36,9 @@ def setup():
 def ingest(from_date, to_date):
     setup()
 
-    # ingest_stock_metadata(count=100)  # Limit to 100 for testing
+    ingest_stock_metadata(count=100)  # Limit to 100 for testing
 
-    # ingest_market_cap(get_all_dates_between(from_date, to_date), count=10)
+    ingest_market_cap(get_all_dates_between(from_date, to_date), count=10)
 
     ingest_price_data(get_all_dates_between(from_date, to_date))
 
